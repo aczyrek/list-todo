@@ -18,8 +18,8 @@
     render();
   };
 
-  const removeTask = (taskIndex) => {
-    tasks.splice(taskIndex, 1);
+  const removeTask = (index) => {
+    tasks.splice(index, 1);
     render();
   };
 
@@ -29,18 +29,17 @@
       htmlSting += `
       <li
       ${task.done ? 'style="text-decoration: line-through"' : ""}>
-      <button class="js-done">✔</button>
+      <button class="js-remove">Delete</button>
       ${task.content}
       </li>`;
     }
     document.querySelector(".js-tasks").innerHTML = htmlSting;
 
-    const removeButton = document.querySelectorAll(".js-done");
+    const removeButton = document.querySelectorAll(".js-remove");
 
     removeButton.forEach((removeButton,index) => {
         removeButton.addEventListener("click", () => {
-            removeTask.splice(index, 1);
-            render();
+            removeTask(index);
         });
   });
 };
