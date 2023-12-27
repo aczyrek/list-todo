@@ -9,17 +9,7 @@
       done: true,
     },
   ];
-  const render = () => {
-    let htmlSting = "";
-    for (const task of tasks) {
-      htmlSting += `
-      <li
-      ${task.done ? 'style="text-decoration: line-through"' : ""}>
-      ${task.content}
-      </li>`;
-    }
-    document.querySelector(".js-tasks").innerHTML = htmlSting;
-  };
+
 
   const addNewTask = (newTaskContent) => {
     tasks.push({
@@ -27,6 +17,33 @@
     });
     render();
   };
+
+  const removeTask = (taskIndex) => {
+    tasks.splice(taskIndex, 1);
+    render();
+  };
+
+  const render = () => {
+    let htmlSting = "";
+    for (const task of tasks) {
+      htmlSting += `
+      <li
+      ${task.done ? 'style="text-decoration: line-through"' : ""}>
+      <button class="js-done">✔</button>
+      ${task.content}
+      </li>`;
+    }
+    document.querySelector(".js-tasks").innerHTML = htmlSting;
+
+    const removeButton = document.querySelectorAll(".js-done");
+
+    removeButton.forEach((removeButton,index) => {
+        removeButton.addEventListener("click", () => {
+            removeTask.splice(index, 1);
+            render();
+        });
+  });
+};
 
   const onFormSubmit = (event) => {
     event.preventDefault();
