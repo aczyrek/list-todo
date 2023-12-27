@@ -8,26 +8,44 @@
       content: "Eat breakfast",
       done: true,
     },
-    {
-      content: "Drink coffee",
-      done: false,
-    },
   ];
   const render = () => {
     let htmlSting = "";
     for (const task of tasks) {
       htmlSting += `
-      <li>
+      <li
+      ${task.done ? 'style="text-decoration: line-through"' : ""}>
       ${task.content}
-      </li>`
+      </li>`;
     }
     document.querySelector(".js-tasks").innerHTML = htmlSting;
-
   };
 
-    const init = () => {
-        render();
-    };
+  const addNewTask = (newTaskContent) => {
+    tasks.push({
+      content: newTaskContent,
+    });
+    render();
+  };
 
-    init();
-};
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+    const newTaskContent = document.querySelector(".js-newTask").value.trim();
+
+    if (newTaskContent === "") {
+      return;
+    }
+
+    addNewTask(newTaskContent);
+  };
+
+  const init = () => {
+    render();
+
+    const form = document.querySelector(".js-form");
+
+    form.addEventListener("submit", onFormSubmit);
+  };
+
+  init();
+}
