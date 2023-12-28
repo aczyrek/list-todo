@@ -27,19 +27,7 @@
     render();
   };
 
-  const render = () => {
-    let htmlSting = "";
-    for (const task of tasks) {
-      htmlSting += `
-      <li
-      ${task.done ? 'style="text-decoration: line-through"' : ""}>
-      <button class="js-done">Done</button>
-      <button class="js-remove">Delete</button>
-      ${task.content}
-      </li>`;
-    }
-    document.querySelector(".js-tasks").innerHTML = htmlSting;
-
+  const bindEvents = () => {
     const removeButton = document.querySelectorAll(".js-remove");
 
     removeButton.forEach((removeButton, index) => {
@@ -55,6 +43,22 @@
         toggleDoneTask(index);
       });
     });
+  };
+
+  const render = () => {
+    let htmlSting = "";
+    for (const task of tasks) {
+      htmlSting += `
+      <li
+      ${task.done ? 'style="text-decoration: line-through"' : ""}>
+      <button class="js-done">Done</button>
+      <button class="js-remove">Delete</button>
+      ${task.content}
+      </li>`;
+    }
+    document.querySelector(".js-tasks").innerHTML = htmlSting;
+
+    bindEvents();
   };
 
   const onFormSubmit = (event) => {
