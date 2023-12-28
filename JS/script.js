@@ -10,7 +10,6 @@
     },
   ];
 
-
   const addNewTask = (newTaskContent) => {
     tasks.push({
       content: newTaskContent,
@@ -18,8 +17,13 @@
     render();
   };
 
-  const removeTask = (index) => {
-    tasks.splice(index, 1);
+  const removeTask = (taskIndex) => {
+    tasks.splice(taskIndex, 1);
+    render();
+  };
+
+  const toggleDoneTask = (taskIndex) => {
+    tasks[taskIndex].done = !tasks[taskIndex].done;
     render();
   };
 
@@ -29,6 +33,7 @@
       htmlSting += `
       <li
       ${task.done ? 'style="text-decoration: line-through"' : ""}>
+      <button class="js-done">Done</button>
       <button class="js-remove">Delete</button>
       ${task.content}
       </li>`;
@@ -37,12 +42,20 @@
 
     const removeButton = document.querySelectorAll(".js-remove");
 
-    removeButton.forEach((removeButton,index) => {
-        removeButton.addEventListener("click", () => {
-            removeTask(index);
-        });
-  });
-};
+    removeButton.forEach((removeButton, index) => {
+      removeButton.addEventListener("click", () => {
+        removeTask(index);
+      });
+    });
+
+    const toggleDoneButtons = document.querySelectorAll(".js-done");
+
+    toggleDoneButtons.forEach((toggleDoneButton, index) => {
+      toggleDoneButton.addEventListener("click", () => {
+        toggleDoneTask(index);
+      });
+    });
+  };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
