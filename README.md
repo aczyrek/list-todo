@@ -12,6 +12,7 @@ A simple to-do list project to help you organize your tasks and stay productive.
 
 ## Demo
 
+https://aczyrek.github.io/list-todo/
 
 
 ## Usage
