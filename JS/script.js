@@ -1,14 +1,5 @@
 {
-  const tasks = [
-    {
-      content: "Have a shower",
-      done: false,
-    },
-    {
-      content: "Eat breakfast",
-      done: true,
-    },
-  ];
+  const tasks = [];
 
   const addNewTask = (newTaskContent) => {
     tasks.push({
@@ -46,17 +37,17 @@
   };
 
   const render = () => {
-    let htmlSting = "";
+    let htmlString = "";
     for (const task of tasks) {
-      htmlSting += `
-      <li
-      ${task.done ? 'style="text-decoration: line-through"' : ""}>
-      <button class="js-done">Done</button>
-      <button class="js-remove">Delete</button>
-      ${task.content}
-      </li>`;
+      const textDecoration = task.done ? "text-decoration: line-through" : "";
+      htmlString += `
+          <li class="list__item" style="${textDecoration}">
+            <button class="js-done">✓</button>
+            <span class="js-span-text">${task.content}</span>
+            <button class="js-remove">☗</button>
+          </li>`;
     }
-    document.querySelector(".js-tasks").innerHTML = htmlSting;
+    document.querySelector(".js-tasks").innerHTML = htmlString;
 
     bindEvents();
   };
